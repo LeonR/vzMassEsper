@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Timers;
+using System.Diagnostics;
 
 namespace vzMassEsper
 {
@@ -24,6 +26,10 @@ namespace vzMassEsper
 		
 		public static string MACROFILE = "macros.txt";
 		public static string CONTACTFILE = "contacts.txt";
+		private string initialisationString = "vzMassEsper initialised!";
+		private string hostAvatarName;
+		
+		private System.Timers.Timer postInitTmr = new System.Timers.Timer();
 		
 		
 		public MainForm()
@@ -33,6 +39,7 @@ namespace vzMassEsper
 			//
 			InitializeComponent();
 			waSetup();
+			announceInitialisation();
 		}
 		
 		
@@ -55,6 +62,67 @@ namespace vzMassEsper
    			System.Windows.Forms.ToolTip allTextTbxTtp = new System.Windows.Forms.ToolTip();
    			allTextTbxTtp.SetToolTip(this.allTextTbx, "When you click the Get All Text button, the text from the VZones client will appear here.");
    			
+		}
+		
+		private void announceInitialisation() {
+        	waSay(initialisationString);
+        	waGet();
+        	
+			// Set up a timer, which, when elapsed, will call getHostName().
+			// The timer allows waGet() to finish processing.
+        	// postInitTmr has been declared at the class level so that its state can be changed in its event handler.
+			postInitTmr.Interval = 1000; // Interval in milliseconds
+			postInitTmr.AutoReset = true; // If false, stops it from repeating
+			postInitTmr.Elapsed += new ElapsedEventHandler(postInitTmrElapsed);
+			postInitTmr.Enabled = true;
+			postInitTmr.Start();
+        }
+        
+		void postInitTmrElapsed(object sender, ElapsedEventArgs e)
+		{
+			// Only attempt to grab the host if the comms buffer is quiet, meaning that waGet() has finished processing.
+			if(commsBufferTable.Rows.Count == 0) {
+				postInitTmr.AutoReset = false;
+				postInitTmr.Enabled = false;
+				getHostName();
+			}
+		}
+		
+		private void getHostName() {
+        	hostAvatarName = GetHostNameByInitString(allText, initialisationString);
+        	if(hostAvatarName != "") {
+        		if(DEBUG_ON) {
+					Debug.WriteLine("I think the host is: " + hostAvatarName);
+        		}
+				//waSay("Your spammer is " + hostAvatarName + ".");
+        	}
+        }
+		
+		public static string GetHostNameByInitString(string allText, string initString) {
+			string initLine = FindFirstLineInMessagesContaining(allText, initString);
+			string hostName = "";
+			if(initLine != "") {
+				Int32 posOfInitString = initLine.IndexOf(initString);
+				if(posOfInitString > -1) {
+					hostName = initLine.Substring(0, posOfInitString - 2);
+				}
+			}
+			return hostName;
+		}
+		
+		protected static string FindFirstLineInMessagesContaining(string allText, string matchText) {
+			string[] messagesArray = allText.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+			string matchingLine = "";
+			foreach (string message in messagesArray) {
+				if( message.Contains(matchText) ) {
+					matchingLine = message;
+				}
+			}
+			if(matchingLine != "") {
+				return matchingLine;
+			} else {
+				return "";  // We might want to give this a different return value later.
+			}
 		}
 		
 		private void loadMacrosFromTextFile() {
@@ -237,6 +305,26 @@ namespace vzMassEsper
 			allTextTbx.SelectionStart = allTextTbx.Text.Length;
 			allTextTbx.ScrollToCaret();
             allTextTbx.Refresh();
+		}
+		
+		private void ContactLbxMouseDown(object sender, MouseEventArgs e)
+		{
+			// Select the item under the mouse when clicked (including right-clicks).
+			// If that selected nothing, select the first item.
+			contactLbx.SelectedIndex = contactLbx.IndexFromPoint(e.X, e.Y);
+			 if (contactLbx.SelectedIndex == -1 && contactList.Count > 0) {
+			 	contactLbx.SelectedIndex = 0;
+			 }
+		}
+		
+		void MacroLbxMouseDown(object sender, MouseEventArgs e)
+		{
+			// Select the item under the mouse when clicked (including right-clicks).
+			// If that selected nothing, select the first item.
+			macroLbx.SelectedIndex = macroLbx.IndexFromPoint(e.X, e.Y);
+			if (macroLbx.SelectedIndex == -1 && macroList.Count > 0) {
+			 	macroLbx.SelectedIndex = 0;
+			}
 		}
 	}
 }
