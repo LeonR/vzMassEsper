@@ -3,8 +3,3 @@ C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\obj
 C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\obj\Debug\vzMassEsper.MainForm.resources
 C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\obj\Debug\GenerateResource.read.1.tlog
 C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\obj\Debug\GenerateResource.write.1.tlog
-C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\bin\Debug\vzMassEsper.exe.config
-C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\bin\Debug\vzMassEsper.exe
-C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\bin\Debug\vzMassEsper.pdb
-C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\obj\Debug\vzMassEsper.exe
-C:\Users\Leon\Documents\SharpDevelop Projects\CSharp\vzMassEsper\vzMassEsper\obj\Debug\vzMassEsper.pdb

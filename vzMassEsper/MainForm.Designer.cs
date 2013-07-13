@@ -88,12 +88,14 @@ namespace vzMassEsper
 			// 
 			// allTextTbx
 			// 
-			this.allTextTbx.Location = new System.Drawing.Point(12, 261);
+			this.allTextTbx.Location = new System.Drawing.Point(12, 267);
 			this.allTextTbx.Multiline = true;
 			this.allTextTbx.Name = "allTextTbx";
 			this.allTextTbx.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.allTextTbx.Size = new System.Drawing.Size(406, 156);
+			this.allTextTbx.Size = new System.Drawing.Size(406, 150);
 			this.allTextTbx.TabIndex = 1;
+			this.allTextTbx.Text = "Please deghost before attempting to send ESPs or get all text, because vzMassEspe" +
+			"r needs to identify your avatar before it can send ESPs.";
 			this.allTextTbx.TextChanged += new System.EventHandler(this.AllTextTbxTextChanged);
 			// 
 			// macroLbx
@@ -102,7 +104,7 @@ namespace vzMassEsper
 			this.macroLbx.FormattingEnabled = true;
 			this.macroLbx.Location = new System.Drawing.Point(12, 46);
 			this.macroLbx.Name = "macroLbx";
-			this.macroLbx.Size = new System.Drawing.Size(200, 173);
+			this.macroLbx.Size = new System.Drawing.Size(200, 186);
 			this.macroLbx.TabIndex = 2;
 			this.macroLbx.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MacroLbxMouseDown);
 			// 
@@ -142,7 +144,7 @@ namespace vzMassEsper
 			this.contactLbx.FormattingEnabled = true;
 			this.contactLbx.Location = new System.Drawing.Point(218, 46);
 			this.contactLbx.Name = "contactLbx";
-			this.contactLbx.Size = new System.Drawing.Size(200, 173);
+			this.contactLbx.Size = new System.Drawing.Size(200, 186);
 			this.contactLbx.TabIndex = 3;
 			this.contactLbx.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ContactLbxMouseDown);
 			// 
@@ -298,7 +300,7 @@ namespace vzMassEsper
 			// 
 			// espSelectedBtn
 			// 
-			this.espSelectedBtn.Location = new System.Drawing.Point(218, 232);
+			this.espSelectedBtn.Location = new System.Drawing.Point(217, 238);
 			this.espSelectedBtn.Name = "espSelectedBtn";
 			this.espSelectedBtn.Size = new System.Drawing.Size(95, 23);
 			this.espSelectedBtn.TabIndex = 5;
@@ -308,7 +310,7 @@ namespace vzMassEsper
 			// 
 			// espAllBtn
 			// 
-			this.espAllBtn.Location = new System.Drawing.Point(323, 232);
+			this.espAllBtn.Location = new System.Drawing.Point(323, 238);
 			this.espAllBtn.Name = "espAllBtn";
 			this.espAllBtn.Size = new System.Drawing.Size(95, 23);
 			this.espAllBtn.TabIndex = 6;
@@ -318,7 +320,7 @@ namespace vzMassEsper
 			// 
 			// getAllTextBtn
 			// 
-			this.getAllTextBtn.Location = new System.Drawing.Point(12, 232);
+			this.getAllTextBtn.Location = new System.Drawing.Point(12, 238);
 			this.getAllTextBtn.Name = "getAllTextBtn";
 			this.getAllTextBtn.Size = new System.Drawing.Size(199, 23);
 			this.getAllTextBtn.TabIndex = 7;
@@ -339,6 +341,7 @@ namespace vzMassEsper
 			this.macroLbl.Size = new System.Drawing.Size(100, 17);
 			this.macroLbl.TabIndex = 8;
 			this.macroLbl.Text = "Macros:";
+			this.macroLbl.Visible = false;
 			// 
 			// contactLbl
 			// 
@@ -357,12 +360,12 @@ namespace vzMassEsper
 			this.Controls.Add(this.macroLbl);
 			this.Controls.Add(this.contactLbx);
 			this.Controls.Add(this.menuStrip1);
-			this.Controls.Add(this.espAllBtn);
 			this.Controls.Add(this.macroLbx);
-			this.Controls.Add(this.espSelectedBtn);
-			this.Controls.Add(this.getAllTextBtn);
 			this.Controls.Add(this.commsBufferDgv);
 			this.Controls.Add(this.allTextTbx);
+			this.Controls.Add(this.getAllTextBtn);
+			this.Controls.Add(this.espAllBtn);
+			this.Controls.Add(this.espSelectedBtn);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
@@ -414,8 +417,6 @@ namespace vzMassEsper
 		private System.Windows.Forms.ListBox macroLbx;
 		private System.Windows.Forms.TextBox allTextTbx;
 		private System.Windows.Forms.DataGridView commsBufferDgv;
-		
-		
-		
+
 	}//class MainForm
 }//namespace
